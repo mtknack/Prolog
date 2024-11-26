@@ -51,7 +51,7 @@ num(2).
 num(1).
 num(3).
 
-menor(Menor) :- menor([], _, Menor).
+menor(Menor) :- menor([], 999999, Menor).
 menor(ListaAux, MenorAux, Menor) :- num(N), naoMembro(N, ListaAux), N < MenorAux, menor([N|ListaAux], N, Menor).
 menor(ListaAux, MenorAux, Menor) :- num(N), naoMembro(N, ListaAux), N >= MenorAux, menor([N|ListaAux], MenorAux, Menor).
 menor(_,MenorAux, Menor) :- Menor = MenorAux.
@@ -62,16 +62,11 @@ menorPessoa(ListaAux, MenorAux, Menor) :-
     naoMembro(Numero, ListaAux),
     MenorAux = [P_Aux, N_Aux],
     Numero < N_Aux,
-    menorPessoa([N_Aux|ListaAux],
-          [Nome, Numero],
-          Menor).
+    menorPessoa([N_Aux|ListaAux], [Nome, Numero], Menor).
 menorPessoa(ListaAux, MenorAux, Menor) :-
     pessoa(Nome, Numero),
     naoMembro(Numero, ListaAux),
     MenorAux = [P_Aux, N_Aux],
     Numero >= N_Aux,
-    menorPessoa([Numero|ListaAux],
-          MenorAux,
-          Menor).
-menorPessoa(_, MenorAux, Menor) :-
-    Menor = MenorAux.
+    menorPessoa([Numero|ListaAux], MenorAux, Menor).
+menorPessoa(_, MenorAux, Menor) :- Menor = MenorAux.
