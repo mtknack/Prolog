@@ -30,3 +30,12 @@ consecutivosNaLista([Elem,Elem|Resto], Elem).
 consecutivosNaLista([_|Resto], Elem) :- consecutivosNaLista(Resto, Elem).
 
 % 10
+elemRepetido([Elem|Resto]) :- membro(Resto, Elem).
+elemRepetido([_|Resto]) :- elemRepetido(Resto).
+
+% 11
+contarTamLista([], 0).
+contarTamLista([_|Resto], Tam) :- contarTamLista(Resto, TamAux), Tam is TamAux + 1.
+
+%12
+removerItemDaLista([Item|_], Item, NovaLista).
