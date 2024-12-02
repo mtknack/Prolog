@@ -16,9 +16,20 @@ conexao(j, k).
 conexao(j, l).
 conexao(n, q).
 conexao(n, p).
+conexao(l, z).
 conexao(k, t).
 conexao(k, u).
 conexao(q, r).
 conexao(q, s).
 conexao(r, w).
 conexao(s, x).
+
+naoMembro(_, []) :- !.
+naoMembro(Elem, [A|B]) :- Elem \= A, naoMembro(Elem, B).
+
+buscaProdundidade(Inicio, Inicio, Lista, ListaInvertida) :- inverteLista(Lista, [], ListaInvertida).
+buscaProdundidade(Inicio, Fim, Lista, Caminho) :- conexao(Inicio, X), naoMembro(X, Lista), buscaProdundidade(X, Fim, [X|Lista], Caminho).
+
+inverteLista([], Lista, Lista).
+inverteLista([A|Resto], ListaAux, ListaInvertida) :-
+    inverteLista(Resto, [A|ListaAux], ListaInvertida).
